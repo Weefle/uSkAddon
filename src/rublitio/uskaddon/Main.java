@@ -2,6 +2,7 @@ package rublitio.uskaddon;
 
 import java.util.HashMap;
 
+import org.bukkit.Chunk;
 import org.bukkit.boss.BarColor;
 import org.bukkit.boss.BarFlag;
 import org.bukkit.boss.BarStyle;
@@ -48,6 +49,7 @@ import rublitio.uskaddon.effects.SetCursorItem;
 import rublitio.uskaddon.effects.SetKeepInventoryOnDeath;
 import rublitio.uskaddon.effects.SetKeepXPOnDeath;
 import rublitio.uskaddon.effects.ShowBossBar;
+import rublitio.uskaddon.effects.UnloadChunk;
 import rublitio.uskaddon.effects.UnloadWorld;
 import rublitio.uskaddon.events.PlayerArmorStandManipulate;
 import rublitio.uskaddon.events.PlayerChangeMainHand;
@@ -73,6 +75,7 @@ import rublitio.uskaddon.expressions.JsonMessage;
 import rublitio.uskaddon.expressions.JsonMessageCommand;
 import rublitio.uskaddon.expressions.JsonMessageTooltip;
 import rublitio.uskaddon.expressions.JsonMessageURL;
+import rublitio.uskaddon.expressions.LoadedChunks;
 import rublitio.uskaddon.expressions.MaxMemory;
 import rublitio.uskaddon.expressions.MaxPlayers;
 import rublitio.uskaddon.expressions.NewBossBar;
@@ -112,9 +115,9 @@ public final class Main extends JavaPlugin {
 		Skript.registerEffect(SetKeepInventoryOnDeath.class, "set keep inventory to %boolean%");
 		Skript.registerEffect(SetKeepXPOnDeath.class, "set keep (xp|level) to %boolean%");
 		
-		Skript.registerEffect(ShowBossBar.class, "show [boss][ ][bar] %bossbar%");
-		Skript.registerEffect(HideBossBar.class, "hide [boss][ ][bar] %bossbar%");
-		Skript.registerEffect(AddFlagToBar.class, "add flag %flag% to [boss][ ][bar] %bossbar%");
+		Skript.registerEffect(ShowBossBar.class, "show[ boss[ ]bar] %bossbar%");
+		Skript.registerEffect(HideBossBar.class, "hide[ boss[ ]bar] %bossbar%");
+		Skript.registerEffect(AddFlagToBar.class, "add flag %flag% to[ boss[ ]bar] %bossbar%");
 		Skript.registerEffect(AddPlayerToBossBar.class, "add player %player% to [boss][ ][bar] %bossbar%");
 		Skript.registerEffect(RemoveAllPlayersFromBossBar.class, "remove all players from [boss][ ][bar]%bossbar%");
 		Skript.registerEffect(RemoveFlagFromBossBar.class, "remove flag %flag% from [boss][ ][bar] %bossbar%");
@@ -129,6 +132,7 @@ public final class Main extends JavaPlugin {
 		Skript.registerEffect(DeleteWorld.class, "delete[ the] world[ (with name|called|named)] %string%");
 		Skript.registerEffect(SetCursorItem.class, "set cursor item to %itemstack%");
 		Skript.registerEffect(SetClickedItem.class, "set clicked item to %itemstack%");
+		Skript.registerEffect(UnloadChunk.class, "unload chunk %chunk%");
 		
 		                          ////Expressions
 		Skript.registerExpression(InventoryName.class, String.class, ExpressionType.SIMPLE, "name of[ inventory] %inventory%");
@@ -159,6 +163,7 @@ public final class Main extends JavaPlugin {
 		Skript.registerExpression(JavaVersion.class, String.class, ExpressionType.SIMPLE, "java version");
 		Skript.registerExpression(PingOfPlayer.class, Integer.class, ExpressionType.SIMPLE, "ping of[ player] %player%");
 		Skript.registerExpression(MaxPlayers.class, Integer.class, ExpressionType.SIMPLE, "max players[ count]");
+		Skript.registerExpression(LoadedChunks.class, Chunk.class, ExpressionType.SIMPLE, new String[]{"([all ]loaded chunks|loaded chunks of all worlds)", "loaded chunks of[ world] %world%"});
 		
 		                          ////Conditions
 		Skript.registerCondition(StringStartsWith.class, new String[]{"%string% start[s][ with] %string%", "%string% (doesn't|don't|not) start[s][ with] %string%"});
