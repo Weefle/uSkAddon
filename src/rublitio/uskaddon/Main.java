@@ -168,8 +168,8 @@ public final class Main extends JavaPlugin {
 		                          ////Conditions
 		Skript.registerCondition(StringStartsWith.class, new String[]{"%string% start[s][ with] %string%", "%string% (doesn't|don't|not) start[s][ with] %string%"});
 		Skript.registerCondition(StringEndsWith.class, new String[]{"%string% end[s][ with] %string%", "%string% (doesn't|don't|not) start[s][ with] %string%"});
-		Skript.registerCondition(HasPotionEffect.class, "[player] %player% has[ potion] effect[ type][ of] %potioneffecttype%");
-		Skript.registerCondition(FileExists.class, "file %string% exists");
+		Skript.registerCondition(HasPotionEffect.class, new String[]{"[player ]%player% has[ potion] effect[ type][ of] %potioneffecttype%", "[player ]%player% has(n't| not)[ potion] effect[ type][ of] %potioneffecttype%"});
+		Skript.registerCondition(FileExists.class, new String[]{"file %string% exist[s]", "file %string% (not|doesn't|don't) exist[s]"});
 		
 		                          ////Classes
 		Classes.registerClass(new ClassInfo<JSONMessage>(JSONMessage.class, "jsonmessage"));

@@ -14,11 +14,13 @@ import ch.njol.util.Kleenean;
 public class HasPotionEffect extends Condition {
 	private Expression<Player> player;
 	private Expression<PotionEffectType> effect;
+	private boolean b;
 	@SuppressWarnings("unchecked")
 	@Override
 	public boolean init(Expression<?>[] exprs, int i, Kleenean arg2, ParseResult arg3) {
 		this.player = (Expression<Player>) exprs[0];
 		this.effect = (Expression<PotionEffectType>) exprs[1];
+		this.b = i == 0;
 		return true;
 	}
 
@@ -29,7 +31,7 @@ public class HasPotionEffect extends Condition {
 
 	@Override
 	public boolean check(Event e) {
-		return this.player.getSingle(e).hasPotionEffect(this.effect.getSingle(e));
+		return this.b ? this.player.getSingle(e).hasPotionEffect(this.effect.getSingle(e)) : !this.player.getSingle(e).hasPotionEffect(this.effect.getSingle(e));
 	}
 
 }

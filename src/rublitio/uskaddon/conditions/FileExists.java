@@ -14,12 +14,13 @@ import ch.njol.util.Kleenean;
 public class FileExists extends Condition
 {
   private Expression<String> file;
-
+  private boolean b;
   @Override
   @SuppressWarnings("unchecked")
 public boolean init(Expression<?>[] exprs, int i, Kleenean kl, ParseResult pr)
   {
     this.file = (Expression<String>) exprs[0];
+    this.b = i == 0;
     return true;
   }
 
@@ -30,7 +31,7 @@ public boolean init(Expression<?>[] exprs, int i, Kleenean kl, ParseResult pr)
 
   public boolean check(Event e)
   {
-    return new File(this.file.getSingle(e)).exists();
+    return this.b ? new File(this.file.getSingle(e)).exists() : !(new File(this.file.getSingle(e)).exists());
   }
 
 }
