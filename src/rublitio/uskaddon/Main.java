@@ -35,6 +35,7 @@ import rublitio.uskaddon.effects.DeleteFile;
 import rublitio.uskaddon.effects.DeleteObjectInRam;
 import rublitio.uskaddon.effects.DeleteWorld;
 import rublitio.uskaddon.effects.HideBossBar;
+import rublitio.uskaddon.effects.LoadChunk;
 import rublitio.uskaddon.effects.LoadWorld;
 import rublitio.uskaddon.effects.RemoveAllPlayersFromBossBar;
 import rublitio.uskaddon.effects.RemoveFlagFromBossBar;
@@ -98,41 +99,42 @@ public final class Main extends JavaPlugin {
 		
 		                           ////Events
 		Skript.registerEvent("player changed world", PlayerChangeWorld.class, PlayerChangedWorldEvent.class, "player change[d] world");
-		Skript.registerEvent("player swap hand items", PlayerSwapHandItem.class, PlayerSwapHandItemsEvent.class, "player swap hand [items]");
 		Skript.registerEvent("player change main hand", PlayerChangeMainHand.class, PlayerChangedMainHandEvent.class, "player change[d] main hand");
-		Skript.registerEvent("player chat tab complete", PlayerChatTabComplete.class, PlayerChatTabCompleteEvent.class, "player [chat] tab complete");
+		Skript.registerEvent("player swap hand items", PlayerSwapHandItem.class, PlayerSwapHandItemsEvent.class, "player swap hand[ items]");
+		Skript.registerEvent("player chat tab complete", PlayerChatTabComplete.class, PlayerChatTabCompleteEvent.class, "player[ chat] tab complete");
 		Skript.registerEvent("player edit book", PlayerEditBook.class, PlayerEditBookEvent.class, "[player] (edit book|book edit)");
 		Skript.registerEvent("player shear entity", PlayerShearEntity.class, PlayerShearEntityEvent.class, "player shear entity");
-		Skript.registerEvent("player velocity", PlayerVelocity.class, PlayerVelocityEvent.class, "player [change] velocity");
+		Skript.registerEvent("player velocity", PlayerVelocity.class, PlayerVelocityEvent.class, "player[ change] velocity");
 		Skript.registerEvent("player armor stand manipulate", PlayerArmorStandManipulate.class, PlayerArmorStandManipulateEvent.class, "player armor stand manipulate");
 		
 		                           /////Effects
 		Skript.registerEffect(SendTitle.class, "send title %string% [with subtitle %-string%] [for %-timespan%] [with %-timespan% fade in and %-timespan% fade out] to %player%");
-		Skript.registerEffect(SendActionBar.class, "set action bar of %player% to %string%");
+		Skript.registerEffect(SendActionBar.class, "set action[ ]bar of %player% to %string%");
 		Skript.registerEffect(LoadWorld.class, "load world %string%");
 		Skript.registerEffect(UnloadWorld.class, "unload world %string%");
-		Skript.registerEffect(SendJson.class, "send %jsonmessage% to %player%");
 		Skript.registerEffect(SetKeepInventoryOnDeath.class, "set keep inventory to %boolean%");
 		Skript.registerEffect(SetKeepXPOnDeath.class, "set keep (xp|level) to %boolean%");
+		Skript.registerEffect(SendJson.class, "send %jsonmessage% to %player%");
 		
 		Skript.registerEffect(ShowBossBar.class, "show[ boss[ ]bar] %bossbar%");
 		Skript.registerEffect(HideBossBar.class, "hide[ boss[ ]bar] %bossbar%");
 		Skript.registerEffect(AddFlagToBar.class, "add flag %flag% to[ boss[ ]bar] %bossbar%");
-		Skript.registerEffect(AddPlayerToBossBar.class, "add player %player% to [boss][ ][bar] %bossbar%");
-		Skript.registerEffect(RemoveAllPlayersFromBossBar.class, "remove all players from [boss][ ][bar]%bossbar%");
-		Skript.registerEffect(RemoveFlagFromBossBar.class, "remove flag %flag% from [boss][ ][bar] %bossbar%");
-		Skript.registerEffect(RemovePlayerFromBossBar.class, "remove player %player% from [boss][ ][bar]%bossbar%");
+		Skript.registerEffect(AddPlayerToBossBar.class, "add player %player% to[ boss][ ][bar] %bossbar%");
+		Skript.registerEffect(RemoveAllPlayersFromBossBar.class, "remove all players from[ boss][ ][bar] %bossbar%");
+		Skript.registerEffect(RemoveFlagFromBossBar.class, "remove flag %flag% from[ boss][ ][bar] %bossbar%");
+		Skript.registerEffect(RemovePlayerFromBossBar.class, "remove player %player% from[ boss][ ][bar] %bossbar%");
 		
-		Skript.registerEffect(SaveObjectInRam.class, "save object %object% in ram[ with name] %string%");
-		Skript.registerEffect(DeleteObjectInRam.class, new String[]{"delete object[ with name] %string%[ saved] in ram", "delete all object[s][ saved] in ram"});
 		Skript.registerEffect(CreateFile.class, "create[ (a|the)] file %string%");
 		Skript.registerEffect(DeleteFile.class, "delete[ the] file %string%");
-		Skript.registerEffect(RequestGarbageCollector.class, "[request[ a] ]garbage collect[or]");
-		Skript.registerEffect(CreateWorld.class, "create[ [a][ new]] world[ (with name|called|named)] %string%");
+		Skript.registerEffect(RequestGarbageCollector.class, "[(request|do|make)[ a] ]garbage collect[or]");
+		Skript.registerEffect(CreateWorld.class, "create[ a][ new] world[ (with name|called|named)] %string%");
 		Skript.registerEffect(DeleteWorld.class, "delete[ the] world[ (with name|called|named)] %string%");
+		Skript.registerEffect(LoadChunk.class, "load chunk %chunk%");
+		Skript.registerEffect(UnloadChunk.class, "unload chunk %chunk%");
+		Skript.registerEffect(SaveObjectInRam.class, "save object %object% in ram[ with name] %string%");
+		Skript.registerEffect(DeleteObjectInRam.class, new String[]{"delete object[ with name] %string%[ saved] in ram", "delete all object[s][ saved] in ram"});
 		Skript.registerEffect(SetCursorItem.class, "set cursor item to %itemstack%");
 		Skript.registerEffect(SetClickedItem.class, "set clicked item to %itemstack%");
-		Skript.registerEffect(UnloadChunk.class, "unload chunk %chunk%");
 		
 		                          ////Expressions
 		Skript.registerExpression(InventoryName.class, String.class, ExpressionType.SIMPLE, "name of[ inventory] %inventory%");
@@ -168,8 +170,8 @@ public final class Main extends JavaPlugin {
 		                          ////Conditions
 		Skript.registerCondition(StringStartsWith.class, new String[]{"%string% start[s][ with] %string%", "%string% (doesn't|don't|not) start[s][ with] %string%"});
 		Skript.registerCondition(StringEndsWith.class, new String[]{"%string% end[s][ with] %string%", "%string% (doesn't|don't|not) start[s][ with] %string%"});
-		Skript.registerCondition(HasPotionEffect.class, new String[]{"[player ]%player% has[ potion] effect[ type][ of] %potioneffecttype%", "[player ]%player% has(n't| not)[ potion] effect[ type][ of] %potioneffecttype%"});
-		Skript.registerCondition(FileExists.class, new String[]{"file %string% exist[s]", "file %string% (not|doesn't|don't) exist[s]"});
+		Skript.registerCondition(HasPotionEffect.class, "[player] %player% has[ potion] effect[ type][ of] %potioneffecttype%");
+		Skript.registerCondition(FileExists.class, "file %string% exists");
 		
 		                          ////Classes
 		Classes.registerClass(new ClassInfo<JSONMessage>(JSONMessage.class, "jsonmessage"));
