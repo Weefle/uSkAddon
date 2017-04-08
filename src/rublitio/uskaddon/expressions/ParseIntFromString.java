@@ -9,11 +9,11 @@ import ch.njol.skript.lang.SkriptParser.ParseResult;
 import ch.njol.skript.lang.util.SimpleExpression;
 import ch.njol.util.Kleenean;
 
-public class ParseIntFromString extends SimpleExpression<Integer> {
+public class ParseIntFromString extends SimpleExpression<Number> {
 	private Expression<String> s;
 	@Override
-	public Class<Integer> getReturnType() {
-		return Integer.class;
+	public Class<Number> getReturnType() {
+		return Number.class;
 	}
 
 	@Override
@@ -30,14 +30,14 @@ public class ParseIntFromString extends SimpleExpression<Integer> {
 
 	@Override
 	public String toString(@Nullable Event e, boolean arg1) {
-		return "parse integer";
+		return "parse number";
 	}
 
 	@Override
 	@Nullable
-	protected Integer[] get(Event e) {
+	protected Number[] get(Event e) {
 		try {
-			return new Integer[]{Integer.parseInt(this.s.getSingle(e))};
+			return new Number[]{Double.parseDouble(this.s.getSingle(e))};
 		}
 		catch (IllegalArgumentException ex) {
 			return null;

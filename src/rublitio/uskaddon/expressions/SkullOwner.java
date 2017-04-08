@@ -49,7 +49,7 @@ public class SkullOwner extends SimpleExpression<String> {
 
 	public void change(Event e, Object[] delta, ChangeMode mode)
 	  {
-	    if (mode == ChangeMode.SET){System.out.println(e);
+	    if (mode == ChangeMode.SET){
 	    	SkullMeta meta = (SkullMeta) this.skull.getSingle(e).getItemMeta();
 	    	meta.setOwner((String) delta[0]);
 	    	this.skull.getSingle(e).setItemMeta(meta);
