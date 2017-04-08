@@ -129,42 +129,42 @@ public final class Main extends JavaPlugin {
 		Skript.registerEffect(RequestGarbageCollector.class, "[(request|do|make)[ a] ]garbage collect[or]");
 		Skript.registerEffect(CreateWorld.class, "create[ a][ new] world[ (with name|called|named)] %string%");
 		Skript.registerEffect(DeleteWorld.class, "delete[ the] world[ (with name|called|named)] %string%");
-		Skript.registerEffect(LoadChunk.class, "load chunk %chunk%");
-		Skript.registerEffect(UnloadChunk.class, "unload chunk %chunk%");
-		Skript.registerEffect(SaveObjectInRam.class, "save object %object% in ram[ with name] %string%");
+		Skript.registerEffect(LoadChunk.class, "load chunk[ at] %chunk%");
+		Skript.registerEffect(UnloadChunk.class, "unload chunk[ at] %chunk%");
+		Skript.registerEffect(SaveObjectInRam.class, new String[]{"save object %object% in ram[ with name] %string%", "save object %object%[ with name] %string% in ram"});
 		Skript.registerEffect(DeleteObjectInRam.class, new String[]{"delete object[ with name] %string%[ saved] in ram", "delete all object[s][ saved] in ram"});
 		Skript.registerEffect(SetCursorItem.class, "set cursor item to %itemstack%");
 		Skript.registerEffect(SetClickedItem.class, "set clicked item to %itemstack%");
 		
 		                          ////Expressions
-		Skript.registerExpression(InventoryName.class, String.class, ExpressionType.SIMPLE, "name of[ inventory] %inventory%");
-		Skript.registerExpression(JsonMessage.class, JSONMessage.class, ExpressionType.SIMPLE, "json[ of] %string%");
+		Skript.registerExpression(InventoryName.class, String.class, ExpressionType.SIMPLE, new String[]{"(name of inventory|inventory's name)", "name of[ inventory] %inventory%"});
+		Skript.registerExpression(JsonMessage.class, JSONMessage.class, ExpressionType.SIMPLE, "json[ message][ (of|from)] %string%");
 		Skript.registerExpression(JsonMessageCommand.class, JSONMessage.class, ExpressionType.SIMPLE, new String[]{"%jsonmessage% suggest %string%", "%jsonmessage% run %string%"});
-		Skript.registerExpression(JsonMessageURL.class, JSONMessage.class, ExpressionType.SIMPLE, "%jsonmessage% open [url] %string%");
+		Skript.registerExpression(JsonMessageURL.class, JSONMessage.class, ExpressionType.SIMPLE, "%jsonmessage% open[ url] %string%");
 		Skript.registerExpression(JsonMessageTooltip.class, JSONMessage.class, ExpressionType.SIMPLE, "%jsonmessage% tooltip %string%");
 		Skript.registerExpression(JsonAppend.class, JSONMessage.class, ExpressionType.SIMPLE, "%jsonmessage% (then|append) %string%");
 		
 		Skript.registerExpression(NewBossBar.class, BossBar.class, ExpressionType.SIMPLE, "new boss[ ]bar");
-		Skript.registerExpression(BossBarColor.class, BarColor.class, ExpressionType.SIMPLE, "[boss][ ][bar] bar colo[u]r of %bossbar%");
-		Skript.registerExpression(FlagsOfBossBar.class, BarFlag.class, ExpressionType.SIMPLE, "list of flags of [boss][ ][bar] %bossbar%");
-		Skript.registerExpression(PlayersOfBossBar.class, Player.class, ExpressionType.SIMPLE, "list of players of [boss][ ][bar] %bossbar%");
-		Skript.registerExpression(BossBarProgress.class, Number.class, ExpressionType.SIMPLE, "[boss][ ][bar] progress of %bossbar%");
+		Skript.registerExpression(BossBarColor.class, BarColor.class, ExpressionType.SIMPLE, "[[boss][ ][bar] ]bar colo[u]r of %bossbar%");
+		Skript.registerExpression(FlagsOfBossBar.class, BarFlag.class, ExpressionType.SIMPLE, "list of flags of[ [boss][ ][bar]] %bossbar%");
+		Skript.registerExpression(PlayersOfBossBar.class, Player.class, ExpressionType.SIMPLE, "list of players of[ [boss][ ][bar]] %bossbar%");
+		Skript.registerExpression(BossBarProgress.class, Number.class, ExpressionType.SIMPLE, "[[boss][ ][bar] ]progress of %bossbar%");
 		Skript.registerExpression(BossBarStyle.class, BarStyle.class, ExpressionType.SIMPLE, "[boss][ ][bar] bar style of %bossbar%");
 		Skript.registerExpression(BossBarTitle.class, String.class, ExpressionType.SIMPLE, "[boss][ ][bar] title of %bossbar%");
-		Skript.registerExpression(BossBarFromSerialised.class, BossBar.class, ExpressionType.SIMPLE, "boss[ ]bar from data %string%");
 		Skript.registerExpression(SerialiseBossBar.class, String.class, ExpressionType.SIMPLE, "seriali(z|s)ed [(contents|data)][ of][ boss][ ][bar] %bossbar%");
+		Skript.registerExpression(BossBarFromSerialised.class, BossBar.class, ExpressionType.SIMPLE, "boss[ ]bar from data %string%");
 		
-		Skript.registerExpression(DropsOfBlock.class, ItemStack.class, ExpressionType.SIMPLE, new String[]{"drops of %block%", "drops of %block% with %itemstack%"});
+		Skript.registerExpression(DropsOfBlock.class, ItemStack.class, ExpressionType.SIMPLE, new String[]{"drops of[ block] %block%", "drops of[ block] %block% with[ item] %itemstack%"});
 		Skript.registerExpression(SkullOwner.class, String.class, ExpressionType.SIMPLE, "[the ]skull owner of %itemstack%");
-		Skript.registerExpression(GetObjectInRam.class, Object.class, ExpressionType.SIMPLE, "[get] object[ with name] %string%[ saved] in ram");
+		Skript.registerExpression(GetObjectInRam.class, Object.class, ExpressionType.SIMPLE, "object[ with name] %string%[ saved] in ram");
 		Skript.registerExpression(NewLine.class, String.class, ExpressionType.SIMPLE, "(new[ ]line|nl)");
-		Skript.registerExpression(ParseIntFromString.class, Integer.class, ExpressionType.SIMPLE, "[parse[d] ]int[eger] from[ string] %string%");
+		Skript.registerExpression(ParseIntFromString.class, Number.class, ExpressionType.SIMPLE, "[parse[d] ]number from[ string] %string%");
 		Skript.registerExpression(FreeMemory.class, Integer.class, ExpressionType.SIMPLE, "free memory");
 		Skript.registerExpression(MaxMemory.class, Integer.class, ExpressionType.SIMPLE, "max[imum] memory");
 		Skript.registerExpression(TotalMemory.class, Integer.class, ExpressionType.SIMPLE, "total memory");
 		Skript.registerExpression(JavaVersion.class, String.class, ExpressionType.SIMPLE, "java version");
 		Skript.registerExpression(PingOfPlayer.class, Integer.class, ExpressionType.SIMPLE, "ping of[ player] %player%");
-		Skript.registerExpression(MaxPlayers.class, Integer.class, ExpressionType.SIMPLE, "max players[ count]");
+		Skript.registerExpression(MaxPlayers.class, Integer.class, ExpressionType.SIMPLE, "max players count");
 		Skript.registerExpression(LoadedChunks.class, Chunk.class, ExpressionType.SIMPLE, new String[]{"([all ]loaded chunks|loaded chunks of all worlds)", "loaded chunks of[ world] %world%"});
 		
 		                          ////Conditions
