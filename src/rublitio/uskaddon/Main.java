@@ -176,7 +176,6 @@ public final class Main extends JavaPlugin {
 		                          ////Classes
 		Classes.registerClass(new ClassInfo<JSONMessage>(JSONMessage.class, "jsonmessage"));
 		Classes.registerClass(new ClassInfo<BossBar>(BossBar.class, "bossbar"));
-		Classes.registerClass(new ClassInfo<ItemStack>(ItemStack.class, "item"));
 		
 		                         /////Enums
 		EnumRegister.registerEnum(BarColor.class, "barcolor");
