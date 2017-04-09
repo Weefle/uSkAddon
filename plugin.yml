@@ -1,6 +1,6 @@
 name: uSkAddon
 main: rublitio.uskaddon.Main
 description: An addon for skript
-version: 1.0
+version: 1.0.1
 depend: [Skript]
 author: Leomixer17
