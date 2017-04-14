@@ -108,7 +108,7 @@ public final class Main extends JavaPlugin {
 		Skript.registerEvent("player armor stand manipulate", PlayerArmorStandManipulate.class, PlayerArmorStandManipulateEvent.class, "player armor stand manipulate");
 		
 		                           /////Effects
-		Skript.registerEffect(SendTitle.class, "send title %string% [with subtitle %-string%] [for %-timespan%] [with %-timespan% fade in and %-timespan% fade out] to %player%");
+		Skript.registerEffect(SendTitle.class, "send title %string% [with subtitle %-string%] [for %-timespan%] [with %-timespan% fade in] [with %-timespan% fade out] to %player%");
 		Skript.registerEffect(SendActionBar.class, "set action[ ]bar of %player% to %string%");
 		Skript.registerEffect(LoadWorld.class, "load world %string%");
 		Skript.registerEffect(UnloadWorld.class, "unload world %string%");

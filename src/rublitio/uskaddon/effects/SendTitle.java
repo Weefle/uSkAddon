@@ -2,7 +2,6 @@ package rublitio.uskaddon.effects;
 
 import javax.annotation.Nullable;
 
-import org.bukkit.craftbukkit.v1_11_R1.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 
@@ -11,9 +10,7 @@ import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser.ParseResult;
 import ch.njol.skript.util.Timespan;
 import ch.njol.util.Kleenean;
-import net.minecraft.server.v1_11_R1.IChatBaseComponent;
-import net.minecraft.server.v1_11_R1.PacketPlayOutTitle;
-import net.minecraft.server.v1_11_R1.PlayerConnection;
+import rublitio.uskaddon.utils.TitleAPI;
 
 public class SendTitle extends Effect {
 	private Expression<String> Title;
@@ -35,55 +32,30 @@ public class SendTitle extends Effect {
 	}
 
 	@Override
-	public String toString(@Nullable Event arg0, boolean arg1) {
-		
-		return null;
+	public String toString(@Nullable Event e, boolean arg1) {
+		return "send title";
 	}
 
 	@Override
 	protected void execute(Event e) {
-	    int timeTick = 60;
-	    if (this.time != null) {
-	      timeTick = (int) ((Timespan)this.time.getSingle(e)).getTicks_i();
-	    }
-
-	    for (Player p : (Player[])this.Player.getAll(e)) {
-	      PlayerConnection connection = ((CraftPlayer)p.getPlayer()).getHandle().playerConnection;
-
-	      if ((this.fadeIn != null) && (this.fadeOut != null)) {
-	        PacketPlayOutTitle packetPlayOutTimes = new PacketPlayOutTitle(PacketPlayOutTitle.EnumTitleAction.TIMES, null, 
-	          (int) ((Timespan)this.fadeIn.getSingle(e)).getTicks_i(), timeTick, (int) ((Timespan)this.fadeOut.getSingle(e)).getTicks_i());
-	        connection.sendPacket(packetPlayOutTimes);
-	      } else if ((this.fadeIn == null) && (this.fadeOut != null)) {
-	        PacketPlayOutTitle packetPlayOutTimes = new PacketPlayOutTitle(PacketPlayOutTitle.EnumTitleAction.TIMES, null, 
-	          5, timeTick, (int) ((Timespan)this.fadeOut.getSingle(e)).getTicks_i());
-	        connection.sendPacket(packetPlayOutTimes);
-	      } else if ((this.fadeIn != null) && (this.fadeOut == null)) {
-	        PacketPlayOutTitle packetPlayOutTimes = new PacketPlayOutTitle(PacketPlayOutTitle.EnumTitleAction.TIMES, null, 
-	          (int) ((Timespan)this.fadeIn.getSingle(e)).getTicks_i(), timeTick, 5);
-	        connection.sendPacket(packetPlayOutTimes);
-	      } else {
-	        PacketPlayOutTitle packetPlayOutTimes = 
-	          new PacketPlayOutTitle(PacketPlayOutTitle.EnumTitleAction.TIMES, null, 5, timeTick, 5);
-	        connection.sendPacket(packetPlayOutTimes);
-	      }
-
-	      if (this.subTitle != null) {
-	        IChatBaseComponent finalSub = 
-	          IChatBaseComponent.ChatSerializer.a("{\"text\": \"" + ((String)this.subTitle.getSingle(e)).toString() + "\"}");
-	        PacketPlayOutTitle packetPlayOutSubTitle = 
-	          new PacketPlayOutTitle(PacketPlayOutTitle.EnumTitleAction.SUBTITLE, finalSub);
-	        connection.sendPacket(packetPlayOutSubTitle);
-	      }
-
-	      if (this.Title != null) {
-	        IChatBaseComponent finalTitle = 
-	          IChatBaseComponent.ChatSerializer.a("{\"text\": \"" + ((String)this.Title.getSingle(e)).toString() + "\"}");
-	        PacketPlayOutTitle packetPlayOutTitle = 
-	          new PacketPlayOutTitle(PacketPlayOutTitle.EnumTitleAction.TITLE, finalTitle);
-	        connection.sendPacket(packetPlayOutTitle);
-	      }
-	    }
+		int timeTicks = 60;
+		int fadeInTicks = 5;
+		int fadeOutTicks = 5;
+		if (this.time != null)
+			timeTicks = (int) this.time.getSingle(e).getTicks_i();
+		if(this.fadeIn != null)
+			fadeInTicks = (int) this.fadeIn.getSingle(e).getTicks_i();
+		if(this.fadeOut != null)
+			fadeOutTicks = (int) this.fadeOut.getSingle(e).getTicks_i();
+		
+		for (final Player p : (Player[]) this.Player.getAll(e)) {
+			if(this.Title != null && this.subTitle != null)
+				TitleAPI.sendTitle(p, fadeInTicks, timeTicks, fadeOutTicks, this.Title.getSingle(e), this.subTitle.getSingle(e));
+			else if(this.Title != null)
+				TitleAPI.sendTitle(p, fadeInTicks, timeTicks, fadeOutTicks, this.Title.getSingle(e), null);
+			else if(this.subTitle != null)
+				TitleAPI.sendTitle(p, fadeInTicks, timeTicks, fadeOutTicks, null, this.subTitle.getSingle(e));
+		}
 	}
 
 }
