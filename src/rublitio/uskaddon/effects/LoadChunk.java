@@ -2,8 +2,10 @@ package rublitio.uskaddon.effects;
 
 import javax.annotation.Nullable;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
 import org.bukkit.event.Event;
+import org.bukkit.event.world.ChunkLoadEvent;
 
 import ch.njol.skript.lang.Effect;
 import ch.njol.skript.lang.Expression;
@@ -26,6 +28,8 @@ public class LoadChunk extends Effect {
 
 	@Override
 	protected void execute(Event e) {
+		final ChunkLoadEvent event = new ChunkLoadEvent(this.chunk.getSingle(e), false);
+		Bukkit.getPluginManager().callEvent(event);
 		this.chunk.getSingle(e).load(false);
 	}
 

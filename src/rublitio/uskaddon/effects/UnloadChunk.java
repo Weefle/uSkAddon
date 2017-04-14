@@ -2,6 +2,7 @@ package rublitio.uskaddon.effects;
 
 import javax.annotation.Nullable;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
 import org.bukkit.event.Event;
 import org.bukkit.event.world.ChunkUnloadEvent;
@@ -29,6 +30,7 @@ public class UnloadChunk extends Effect {
 	@Override
 	protected void execute(Event e) {
 		final ChunkUnloadEvent event = new ChunkUnloadEvent(this.chunk.getSingle(e));
+		Bukkit.getPluginManager().callEvent(event);
 		if(!event.isCancelled())
 			this.chunk.getSingle(e).unload(true);
 	}
