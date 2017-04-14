@@ -1,7 +1,5 @@
 package rublitio.uskaddon.expressions;
 
-import java.util.ArrayList;
-
 import javax.annotation.Nullable;
 
 import org.bukkit.Bukkit;
@@ -46,11 +44,18 @@ public class LoadedChunks extends SimpleExpression<Chunk> {
 	protected Chunk[] get(Event e) {
 		if(this.b)
 			return this.world.getSingle(e).getLoadedChunks();
-		final ArrayList<Chunk> chunks = new ArrayList<Chunk>();
-		for(final World w : Bukkit.getServer().getWorlds())
-			for(final Chunk c : w.getLoadedChunks())
-				chunks.add(c);
-		return (Chunk[]) chunks.toArray();
+		int numchunks = 0;
+		for(int i = 0; i < Bukkit.getWorlds().size(); i++)
+			for(int i1 = 0; i1 < Bukkit.getWorlds().get(i).getLoadedChunks().length; i1++)
+				numchunks++;
+		final Chunk[] chunks = new Chunk[numchunks];
+		int numchunk = 0;
+		for(final World w : Bukkit.getWorlds())
+			for(int i = 0; i < w.getLoadedChunks().length; i++) {
+				chunks[numchunk] = w.getLoadedChunks()[i];
+				numchunk++;
+			}
+		return chunks;
 	}
 
 
