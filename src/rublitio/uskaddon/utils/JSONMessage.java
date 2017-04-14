@@ -1,19 +1,17 @@
 package rublitio.uskaddon.utils;
 
 import java.io.StringWriter;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.bukkit.Achievement;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.craftbukkit.v1_11_R1.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import com.google.gson.stream.JsonWriter;
-
-import net.minecraft.server.v1_11_R1.IChatBaseComponent;
-import net.minecraft.server.v1_11_R1.PacketPlayOutChat;
 
 public class JSONMessage
 {
@@ -177,9 +175,19 @@ public JSONMessage(String firstPartText)
 
   public void send(Player[] players)
   {
-    for (Player p : players)
-      ((CraftPlayer)p).getHandle().playerConnection.sendPacket(new PacketPlayOutChat(IChatBaseComponent.ChatSerializer.a(toJSONString())));
-  }
+	final String version = Bukkit.getServer().getClass().getPackage().getName().split("\\.")[3];
+	final String nmsClass = ((!version.startsWith("v1_7_R")) ? "IChatBaseComponent$" : "") + "ChatSerializer";
+	for (Player p : players) {
+		try {
+			final Object packet = TitleAPI.getNMSClass("PacketPlayOutChat").getConstructor(TitleAPI.getNMSClass("IChatBaseComponent")).newInstance(TitleAPI.getNMSClass(nmsClass).getMethod("a", String.class).invoke(null, toJSONString()));
+			final Object handle = p.getClass().getMethod("getHandle").invoke(p);
+			final Object playerConnection = handle.getClass().getField("playerConnection").get(handle);
+			playerConnection.getClass().getMethod("sendPacket", TitleAPI.getNMSClass("Packet")).invoke(playerConnection, packet);
+		} catch (SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | InstantiationException | NoSuchFieldException ex) {
+			ex.printStackTrace();
+		}
+	}
+ }
 
   public String toOldMessageFormat()
   {
