@@ -4,6 +4,7 @@ import javax.annotation.Nullable;
 
 import org.bukkit.Chunk;
 import org.bukkit.event.Event;
+import org.bukkit.event.world.ChunkUnloadEvent;
 
 import ch.njol.skript.lang.Effect;
 import ch.njol.skript.lang.Expression;
@@ -27,7 +28,9 @@ public class UnloadChunk extends Effect {
 
 	@Override
 	protected void execute(Event e) {
-		this.chunk.getSingle(e).unload(true);
+		final ChunkUnloadEvent event = new ChunkUnloadEvent(this.chunk.getSingle(e));
+		if(!event.isCancelled())
+			this.chunk.getSingle(e).unload(true);
 	}
 
 }
