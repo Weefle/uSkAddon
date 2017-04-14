@@ -81,7 +81,7 @@ import rublitio.uskaddon.expressions.MaxMemory;
 import rublitio.uskaddon.expressions.MaxPlayers;
 import rublitio.uskaddon.expressions.NewBossBar;
 import rublitio.uskaddon.expressions.NewLine;
-import rublitio.uskaddon.expressions.ParseIntFromString;
+import rublitio.uskaddon.expressions.ParseNumFromString;
 import rublitio.uskaddon.expressions.PingOfPlayer;
 import rublitio.uskaddon.expressions.PlayersOfBossBar;
 import rublitio.uskaddon.expressions.SerialiseBossBar;
@@ -158,7 +158,7 @@ public final class Main extends JavaPlugin {
 		Skript.registerExpression(SkullOwner.class, String.class, ExpressionType.SIMPLE, "[the ]skull owner of %itemstack%");
 		Skript.registerExpression(GetObjectInRam.class, Object.class, ExpressionType.SIMPLE, "object[ with name] %string%[ saved] in ram");
 		Skript.registerExpression(NewLine.class, String.class, ExpressionType.SIMPLE, "(new[ ]line|nl)");
-		Skript.registerExpression(ParseIntFromString.class, Number.class, ExpressionType.SIMPLE, "[parse[d] ]number from[ string] %string%");
+		Skript.registerExpression(ParseNumFromString.class, Number.class, ExpressionType.SIMPLE, "[parse[d] ]number from[ string] %string%");
 		Skript.registerExpression(FreeMemory.class, Integer.class, ExpressionType.SIMPLE, "free memory");
 		Skript.registerExpression(MaxMemory.class, Integer.class, ExpressionType.SIMPLE, "max[imum] memory");
 		Skript.registerExpression(TotalMemory.class, Integer.class, ExpressionType.SIMPLE, "total memory");

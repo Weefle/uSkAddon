@@ -9,7 +9,7 @@ import ch.njol.skript.lang.SkriptParser.ParseResult;
 import ch.njol.skript.lang.util.SimpleExpression;
 import ch.njol.util.Kleenean;
 
-public class ParseIntFromString extends SimpleExpression<Number> {
+public class ParseNumFromString extends SimpleExpression<Number> {
 	private Expression<String> s;
 	@Override
 	public Class<Number> getReturnType() {
